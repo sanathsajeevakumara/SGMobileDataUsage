@@ -19,21 +19,21 @@ class QuarterConsumptionViewModel @Inject constructor(
     private val quarterConsumptionUseCase: QuarterConsumptionUseCase
 ) : ViewModel() {
 
-    private var _initialYear: Int = -1
+    private var initialYear: Int = -1
 
     var quarterState by mutableStateOf<QuarterConsumptionState>(QuarterConsumptionState.OnScreenEmpty)
         private set
 
-    private val _quarterExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+    private val quarterExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         println("QuarterUsageViewModel Exception $throwable")
     }
 
-    fun getQuarterConsumptionsByYear() = viewModelScope
-        .launch(dispatcher + _quarterExceptionHandler) {
+    fun getQuarterConsumptionsByYear(year: Int) = viewModelScope
+        .launch(dispatcher + quarterExceptionHandler) {
 
             //retrieve the initial year
-            if (_initialYear == -1) {
-                _initialYear = quarterConsumptionUseCase.getInitialYear()
+            if (initialYear == -1) {
+                initialYear = quarterConsumptionUseCase.getInitialYear()
             }
 
             quarterState = QuarterConsumptionState.OnLoading
@@ -42,7 +42,7 @@ class QuarterConsumptionViewModel @Inject constructor(
 
             quarterState = if (quarterConsumptionsByYear.isNotEmpty()) {
                 QuarterConsumptionState.OnQuarterUsageDataAvailable(
-                    pageNumber = _initialYear,
+                    pageNumber = year - initialYear,
                     quarterUsage = quarterConsumptionsByYear
                 )
             } else {
