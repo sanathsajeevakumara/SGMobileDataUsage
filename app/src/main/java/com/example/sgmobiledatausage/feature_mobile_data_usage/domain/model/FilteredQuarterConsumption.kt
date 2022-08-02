@@ -8,9 +8,9 @@ data class FilteredQuarterConsumption(
     val volumes: String
 ) {
 
-    fun getMappedQuarterUsageByYear(): Map<String, String>? {
+    fun getMappedQuarterConsumptionByYear(): Map<String, String>? {
         return try {
-//            printZipValue()
+            printZipValue()
             val quartersList:List<String> = quarters.split(",")
             val volumesList:List<String> = volumes.split(",")
             quartersList.zip(volumesList).toMap()
