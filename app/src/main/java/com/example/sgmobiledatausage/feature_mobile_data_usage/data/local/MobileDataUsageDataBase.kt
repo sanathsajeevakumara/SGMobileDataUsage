@@ -6,7 +6,7 @@ import com.example.sgmobiledatausage.feature_mobile_data_usage.domain.model.Quar
 
 @Database(
     entities = [QuarterConsumption::class],
-    version = 1
+    version = 2
 )
 abstract class MobileDataUsageDataBase: RoomDatabase() {
     abstract val mobileDataUsageDao: MobileDataUsageDao
