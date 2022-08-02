@@ -55,8 +55,8 @@ fun YearlyUsageScreen(
             when (viewModelState) {
 
                 is YearlyConsumptionState.OnEmptyScreen -> {
-                    viewModel.fetchDataStoreSearchData()
                     viewModel.getYearlyTotalConsumptionData()
+                    viewModel.fetchDataStoreSearchData()
                 }
 
                 is YearlyConsumptionState.OnLoading -> {

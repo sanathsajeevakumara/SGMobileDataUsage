@@ -1,19 +1,13 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "205aa3eada11a759bf1d062f1c89b626",
+    "version": 2,
+    "identityHash": "36d799f468d6e0b20ecd7f9089d52f36",
     "entities": [
       {
         "tableName": "QuarterConsumption",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `year` INTEGER NOT NULL, `quarter` TEXT NOT NULL, `volume` REAL NOT NULL, PRIMARY KEY(`year`, `quarter`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`year` INTEGER NOT NULL, `quarter` TEXT NOT NULL, `volume` REAL NOT NULL, PRIMARY KEY(`year`, `quarter`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
           {
             "fieldPath": "year",
             "columnName": "year",
@@ -47,7 +41,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '205aa3eada11a759bf1d062f1c89b626')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '36d799f468d6e0b20ecd7f9089d52f36')"
     ]
   }
 }

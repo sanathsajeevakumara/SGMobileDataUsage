@@ -4,7 +4,9 @@ import com.example.sgmobiledatausage.feature_mobile_data_usage.data.remote.datas
 import retrofit2.http.Query
 
 interface DataStoreSearchUsageInterface {
+
     suspend fun getMobileDataUsage(
-        @Query("resource_id") resourceId: String,
+        @Query("resource_id") resourceId: String?,
     ): DataStoreSearchResponse
+
 }

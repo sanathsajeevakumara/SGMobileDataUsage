@@ -38,9 +38,13 @@ class YearlyTotalConsumptionUseCase @Inject constructor(
                         )
                     }
 
-                if (quarterConsumptionList != null) {
-                    repository.insertAllMobileDataUsageRecord(quarterConsumptionList)
+                quarterConsumptionList?.let { quarterConsumption ->
+                    repository.insertAllMobileDataUsageRecord(quarterConsumption)
                 }
+
+//                if (quarterConsumptionList != null) {
+//                    repository.insertAllMobileDataUsageRecord(quarterConsumptionList)
+//                }
 
             } else {
                 Log.e(

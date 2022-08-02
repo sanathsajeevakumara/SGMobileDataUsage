@@ -39,5 +39,5 @@ class YearlyConsumptionViewModel @Inject constructor(
 
     fun fetchDataStoreSearchData() = viewModelScope.launch(dispatcher) {
             yearlyTotalConsumptionUseCase.retrieveDataStoreConsumptionData()
-        }
+    }
 }
