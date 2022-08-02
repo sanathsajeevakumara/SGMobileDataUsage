@@ -18,7 +18,7 @@ interface MobileDataUsageDao {
     @Query("SELECT * FROM quarterconsumption")
     fun getAllQuarterConsumption(): Flow<List<QuarterConsumption>>
 
-    @Query("SELECT year,SUM(volume) as totalUsage From quarterconsumption GROUP BY year")
+    @Query("SELECT year,SUM(volume) as totalConsumption From quarterconsumption GROUP BY year")
     fun getYearlyTotalConsumption(): Flow<List<YearlyTotalConsumption>>
 
     @Query("SELECT year, group_concat(volume) as volumes , group_concat(quarter) as quarters FROM quarterconsumption GROUP BY year")
