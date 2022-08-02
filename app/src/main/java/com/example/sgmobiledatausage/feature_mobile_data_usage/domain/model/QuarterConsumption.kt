@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class QuarterConsumption(
     @PrimaryKey val id: Int? = null,
     val year: Int,
-    val Quarter: String,
+    val quarter: String,
     val volume: Float
 )

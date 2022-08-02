@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class DataStoreSearchUsageImpl @Inject constructor(
     private val api: SGMobileDataUsageAPI
-): DataStoreSearchUsage {
+): DataStoreSearchUsageInterface {
 
     override suspend fun getMobileDataUsage(resourceId: String): DataStoreSearchResponse {
         val mobileDataConsumptionRes = api.getMobileDataUsage(SGConstValue.RESOURCE_ID)
