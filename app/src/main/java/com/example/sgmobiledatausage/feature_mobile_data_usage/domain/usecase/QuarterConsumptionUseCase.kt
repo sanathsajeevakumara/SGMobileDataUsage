@@ -4,7 +4,7 @@ import com.example.sgmobiledatausage.feature_mobile_data_usage.domain.model.Filt
 import com.example.sgmobiledatausage.feature_mobile_data_usage.domain.repository.MobileDataUsageRepository
 import javax.inject.Inject
 
-class QuarterConsumption @Inject constructor(
+class QuarterConsumptionUseCase @Inject constructor(
     private val repository: MobileDataUsageRepository
 ) {
 
