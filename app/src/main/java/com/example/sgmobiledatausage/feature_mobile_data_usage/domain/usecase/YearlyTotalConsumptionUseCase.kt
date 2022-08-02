@@ -24,13 +24,13 @@ class YearlyTotalConsumptionUseCase @Inject constructor(
 
         try {
 
-            val quarterConsumptionRecordData =
+            val dataStoreSearchData =
                 dataStoreSearchUsageInterface.getMobileDataUsage(SGConstValue.RESOURCE_ID)
 
-            if (quarterConsumptionRecordData.isCallSuccess) {
+            if (dataStoreSearchData.isCallSuccess) {
 
                 val quarterConsumptionList =
-                    quarterConsumptionRecordData.dataStoreConsumptionRecord?.map { record ->
+                    dataStoreSearchData.dataStoreConsumptionRecord?.map { record ->
                         QuarterConsumption(
                             year = record.getYearValue(),
                             quarter = record.getQuarterValue(),
@@ -38,7 +38,9 @@ class YearlyTotalConsumptionUseCase @Inject constructor(
                         )
                     }
 
-                quarterConsumptionList?.let { repository.insertAllMobileDataUsageRecord(it) }
+                if (quarterConsumptionList != null) {
+                    repository.insertAllMobileDataUsageRecord(quarterConsumptionList)
+                }
 
             } else {
                 Log.e(
