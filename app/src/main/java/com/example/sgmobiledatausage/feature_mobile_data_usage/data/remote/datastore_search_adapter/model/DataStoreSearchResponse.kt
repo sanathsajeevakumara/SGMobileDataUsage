@@ -3,7 +3,7 @@ package com.example.sgmobiledatausage.feature_mobile_data_usage.data.remote.data
 import com.example.sgmobiledatausage.feature_mobile_data_usage.data.remote.response_model.Record
 
 data class DataStoreSearchResponse(
-    val isCallSuccess: Boolean = false,
+    val isCallSuccess: Boolean,
     val dataStoreConsumptionRecord: List<Record>?,
     val message: String = ""
 )

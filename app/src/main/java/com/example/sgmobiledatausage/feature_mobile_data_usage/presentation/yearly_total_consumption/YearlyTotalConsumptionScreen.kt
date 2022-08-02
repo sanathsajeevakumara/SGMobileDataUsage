@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sgmobiledatausage.R
+import com.example.sgmobiledatausage.feature_mobile_data_usage.presentation.destinations.QuarterConsumptionScreenDestination
 import com.example.sgmobiledatausage.feature_mobile_data_usage.presentation.yearly_total_consumption.components.YearlyConsumptionItem
 import com.example.sgmobiledatausage.feature_mobile_data_usage.presentation.yearly_total_consumption.state.YearlyConsumptionState
 import com.example.sgmobiledatausage.feature_mobile_data_usage.presentation.yearly_total_consumption.viewmodel.YearlyConsumptionViewModel
@@ -76,31 +77,31 @@ fun YearlyUsageScreen(
                     }
                 }
 
-                is YearlyConsumptionState.OnYearlyUsageAvailable -> {
+                is YearlyConsumptionState.OnYearlyConsumptionAvailable -> {
 
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = values
                     ) {
 
-                        items(viewModelState.yearlyUsage.size) { index ->
-                            val yearlyConsumptionData = viewModelState.yearlyUsage[index]
+                        items(viewModelState.yearlyConsumption.size) { index ->
+                            val yearlyConsumptionData = viewModelState.yearlyConsumption[index]
                             YearlyConsumptionItem(
                                 year = yearlyConsumptionData.year.toString(),
                                 totalConsumption = yearlyConsumptionData.totalConsumption.toString(),
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clickable {
-//                                        navigator.navigate(
-//                                            QuarterUsageScreenDestination(
-//                                                year = yearlyConsumptionData.year
-//                                            )
-//                                        )
+                                        navigator.navigate(
+                                            QuarterConsumptionScreenDestination(
+                                                year = yearlyConsumptionData.year
+                                            )
+                                        )
                                     }
                                     .padding(16.dp)
                             )
 
-                            if (index < viewModelState.yearlyUsage.size - 1) {
+                            if (index < viewModelState.yearlyConsumption.size - 1) {
                                 Divider(
                                     modifier = Modifier.padding(
                                         horizontal = 16.dp

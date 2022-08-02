@@ -10,6 +10,7 @@ class DataStoreSearchUsageImpl @Inject constructor(
 ): DataStoreSearchUsageInterface {
 
     override suspend fun getMobileDataUsage(resourceId: String): DataStoreSearchResponse {
+
         val mobileDataConsumptionRes = api.getMobileDataUsage(SGConstValue.RESOURCE_ID)
 
         return if (mobileDataConsumptionRes.isSuccessful) {
@@ -19,6 +20,7 @@ class DataStoreSearchUsageImpl @Inject constructor(
             )
         } else {
             DataStoreSearchResponse(
+                isCallSuccess = false,
                 dataStoreConsumptionRecord = null,
                 message = mobileDataConsumptionRes.message()
             )

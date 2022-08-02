@@ -17,24 +17,27 @@ import javax.inject.Inject
 class YearlyConsumptionViewModel @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val yearlyTotalConsumptionUseCase: YearlyTotalConsumptionUseCase
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf<YearlyConsumptionState>(YearlyConsumptionState.OnEmptyScreen)
         private set
 
     fun getYearlyTotalConsumptionData() = viewModelScope
         .launch(dispatcher) {
+
+            state = YearlyConsumptionState.OnLoading
+
             yearlyTotalConsumptionUseCase.getYearlyTotalConsumption()
                 .catch { error ->
                     state = YearlyConsumptionState.OnError(error.toString())
                 }
                 .collect { yearlyTotalConsumption ->
-                    state = YearlyConsumptionState.OnYearlyUsageAvailable(yearlyTotalConsumption)
+                    state =
+                        YearlyConsumptionState.OnYearlyConsumptionAvailable(yearlyTotalConsumption)
                 }
         }
 
-    fun fetchDataStoreSearchData() = viewModelScope
-        .launch(dispatcher) {
+    fun fetchDataStoreSearchData() = viewModelScope.launch(dispatcher) {
             yearlyTotalConsumptionUseCase.retrieveDataStoreConsumptionData()
         }
 }
