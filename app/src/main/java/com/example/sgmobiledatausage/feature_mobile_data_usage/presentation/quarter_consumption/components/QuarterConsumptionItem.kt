@@ -8,9 +8,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.sgmobiledatausage.R
 import com.example.sgmobiledatausage.feature_mobile_data_usage.domain.model.FilteredQuarterConsumption
+import com.example.sgmobiledatausage.feature_mobile_data_usage.presentation.util.isLandScape
 import com.google.accompanist.pager.*
 
 @ExperimentalMaterial3Api
@@ -23,6 +25,11 @@ fun QuarterConsumptionItem(
 ) {
 
     val pagerState = rememberPagerState()
+
+    val cardHeightSize: Dp = if (isLandScape()) { 280.dp } else { 400.dp }
+    val spacerHeightBeforeYear: Dp = if (isLandScape()) { 0.dp } else { 16.dp }
+    val spacerHeightAfterYear: Dp = if (isLandScape()) { 16.dp } else { 64.dp }
+    val indicatorPadding: Dp = if (isLandScape()) { 24.dp } else { 32.dp }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -38,7 +45,7 @@ fun QuarterConsumptionItem(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp)
+                .height(cardHeightSize)
                 .padding(
                     horizontal = 16.dp,
                     vertical = 40.dp
@@ -51,7 +58,7 @@ fun QuarterConsumptionItem(
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(spacerHeightBeforeYear))
 
                 Text(
                     text = stringResource(id = R.string.year) + " ${quarterConsumption[page].year}",
@@ -59,7 +66,7 @@ fun QuarterConsumptionItem(
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
 
-                Spacer(modifier = Modifier.height(64.dp))
+                Spacer(modifier = Modifier.height(spacerHeightAfterYear))
 
                 val quarterConsumptionMap = quarterConsumption[page].getMappedQuarterConsumptionByYear()
 
@@ -100,7 +107,7 @@ fun QuarterConsumptionItem(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 32.dp),
+            .padding(bottom = indicatorPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
