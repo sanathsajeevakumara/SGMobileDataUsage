@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SG Mobile Data Usage</string>
     <string name="yearly_consumption_title">Yearly consumption</string>
-    <string name="quarter_consumption_title">Quarter consumption By Years</string>
+    <string name="quarter_consumption_title">Quarter consumption by year</string>
     <string name="year">Year</string>
-    <string name="total_consumption">Total consumption</string>
+    <string name="total_consumption">Total Consumption</string>
 </resources>
