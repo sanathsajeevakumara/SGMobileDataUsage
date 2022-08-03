@@ -26,10 +26,26 @@ fun QuarterConsumptionItem(
 
     val pagerState = rememberPagerState()
 
-    val cardHeightSize: Dp = if (isLandScape()) { 280.dp } else { 400.dp }
-    val spacerHeightBeforeYear: Dp = if (isLandScape()) { 0.dp } else { 16.dp }
-    val spacerHeightAfterYear: Dp = if (isLandScape()) { 16.dp } else { 64.dp }
-    val indicatorPadding: Dp = if (isLandScape()) { 24.dp } else { 32.dp }
+    val cardHeightSize: Dp
+    val spacerHeightBeforeYear: Dp
+    val spacerHeightAfterYear: Dp
+    val indicatorPadding: Dp
+
+    if (isLandScape()) {
+        cardHeightSize = 280.dp
+        spacerHeightBeforeYear = 0.dp
+        spacerHeightAfterYear = 16.dp
+        indicatorPadding = 24.dp
+    } else {
+        cardHeightSize = 400.dp
+        spacerHeightBeforeYear = 16.dp
+        spacerHeightAfterYear = 64.dp
+        indicatorPadding = 32.dp
+    }
+
+    LaunchedEffect(pagerState) {
+        pagerState.animateScrollToPage(pageNumber)
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -37,73 +53,73 @@ fun QuarterConsumptionItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-    HorizontalPager(
-        count = quarterConsumption.size,
-        state = pagerState,
-        contentPadding = contentPadding
-    ) { page ->
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(cardHeightSize)
-                .padding(
-                    horizontal = 16.dp,
-                    vertical = 40.dp
+        HorizontalPager(
+            count = quarterConsumption.size,
+            state = pagerState,
+            contentPadding = contentPadding
+        ) { page ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(cardHeightSize)
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 40.dp
+                    ),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
                 ),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            ),
-            elevation = CardDefaults.cardElevation(4.dp),
-            shape = RoundedCornerShape(15.dp)
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+                elevation = CardDefaults.cardElevation(4.dp),
+                shape = RoundedCornerShape(15.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
 
-                Spacer(modifier = Modifier.height(spacerHeightBeforeYear))
+                    Spacer(modifier = Modifier.height(spacerHeightBeforeYear))
 
-                Text(
-                    text = stringResource(id = R.string.year) + " ${quarterConsumption[page].year}",
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
+                    Text(
+                        text = stringResource(id = R.string.year) + " ${quarterConsumption[page].year}",
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
 
-                Spacer(modifier = Modifier.height(spacerHeightAfterYear))
+                    Spacer(modifier = Modifier.height(spacerHeightAfterYear))
 
-                val quarterAndConsumptionMap = quarterConsumption[page].getMappedQuarterConsumptionByYear()
+                    val quarterAndConsumptionMap =
+                        quarterConsumption[page].getMappedQuarterConsumptionByYear()
 
-                quarterAndConsumptionMap?.let { quarterAndConsumption ->
+                    quarterAndConsumptionMap?.let { quarterAndConsumption ->
 
-                    if (quarterAndConsumption.isNotEmpty()) {
-                        for (key in quarterAndConsumption.keys) {
+                        if (quarterAndConsumption.isNotEmpty()) {
+                            for (key in quarterAndConsumption.keys) {
 
-                            Box(
-                                modifier = Modifier.fillMaxWidth(),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Row(
+                                Box(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.Center,
-                                    verticalAlignment = Alignment.CenterVertically
+                                    contentAlignment = Alignment.Center
                                 ) {
-                                    Text(
-                                        text = "$key : ",
-                                        style = MaterialTheme.typography.bodyMedium
-                                    )
-                                    Text(
-                                        text = quarterAndConsumption[key]?:"",
-                                        style = MaterialTheme.typography.bodyMedium
-                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = "$key : ",
+                                            style = MaterialTheme.typography.bodyMedium
+                                        )
+                                        Text(
+                                            text = quarterAndConsumption[key] ?: "",
+                                            style = MaterialTheme.typography.bodyMedium
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
+                }
             }
         }
     }
 
-    }
-    
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -116,9 +132,4 @@ fun QuarterConsumptionItem(
             activeColor = MaterialTheme.colorScheme.surfaceVariant,
         )
     }
-
-    LaunchedEffect(pagerState){
-        pagerState.animateScrollToPage(pageNumber)
-    }
-    
 }
