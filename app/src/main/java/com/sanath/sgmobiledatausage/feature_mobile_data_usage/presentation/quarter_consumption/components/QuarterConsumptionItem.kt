@@ -68,11 +68,12 @@ fun QuarterConsumptionItem(
 
                 Spacer(modifier = Modifier.height(spacerHeightAfterYear))
 
-                val quarterConsumptionMap = quarterConsumption[page].getMappedQuarterConsumptionByYear()
+                val quarterAndConsumptionMap = quarterConsumption[page].getMappedQuarterConsumptionByYear()
 
-                quarterConsumptionMap?.let { quarterUsage ->
-                    if (quarterUsage.isNotEmpty()) {
-                        for (key in quarterUsage.keys) {
+                quarterAndConsumptionMap?.let { quarterAndConsumption ->
+
+                    if (quarterAndConsumption.isNotEmpty()) {
+                        for (key in quarterAndConsumption.keys) {
 
                             Box(
                                 modifier = Modifier.fillMaxWidth(),
@@ -84,12 +85,11 @@ fun QuarterConsumptionItem(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "$key :",
+                                        text = "$key : ",
                                         style = MaterialTheme.typography.bodyMedium
                                     )
-                                    Spacer(Modifier.width(10.dp))
                                     Text(
-                                        text = quarterConsumptionMap[key]?:"",
+                                        text = quarterAndConsumption[key]?:"",
                                         style = MaterialTheme.typography.bodyMedium
                                     )
                                 }
