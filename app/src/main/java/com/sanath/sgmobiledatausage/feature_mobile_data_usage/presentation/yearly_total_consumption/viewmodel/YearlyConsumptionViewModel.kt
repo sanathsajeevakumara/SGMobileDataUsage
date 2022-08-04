@@ -19,19 +19,18 @@ class YearlyConsumptionViewModel @Inject constructor(
     private val yearlyTotalConsumptionUseCase: YearlyTotalConsumptionUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf<YearlyConsumptionState>(YearlyConsumptionState.OnEmptyScreen)
-        private set
+    var yearlyState by mutableStateOf<YearlyConsumptionState>(YearlyConsumptionState.OnEmptyScreen)
 
     fun getYearlyTotalConsumptionData() = viewModelScope.launch(dispatcher) {
 
-            state = YearlyConsumptionState.OnLoading
+            yearlyState = YearlyConsumptionState.OnLoading
 
             yearlyTotalConsumptionUseCase.getYearlyTotalConsumption()
                 .catch { error ->
-                    state = YearlyConsumptionState.OnError(error.toString())
+                    yearlyState = YearlyConsumptionState.OnError(error.toString())
                 }
                 .collect { yearlyTotalConsumption ->
-                    state =
+                    yearlyState =
                         YearlyConsumptionState.OnYearlyConsumptionAvailable(yearlyTotalConsumption)
                 }
         }

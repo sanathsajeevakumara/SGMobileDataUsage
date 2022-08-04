@@ -82,7 +82,7 @@ internal class YearlyConsumptionViewModelTest {
     fun onEmptyScreenTest() {
         assertEquals(
             YearlyConsumptionState.OnEmptyScreen,
-            yearlyConsumptionViewModel.state
+            yearlyConsumptionViewModel.yearlyState
         )
     }
 
@@ -98,7 +98,7 @@ internal class YearlyConsumptionViewModelTest {
 
         assertEquals(
             yearlyUsage,
-            yearlyConsumptionViewModel.state
+            yearlyConsumptionViewModel.yearlyState
         )
 
     }

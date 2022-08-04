@@ -22,7 +22,6 @@ class QuarterConsumptionViewModel @Inject constructor(
     private var initialYear: Int = -1
 
     var quarterState by mutableStateOf<QuarterConsumptionState>(QuarterConsumptionState.OnScreenEmpty)
-        private set
 
     private val quarterExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         println("QuarterUsageViewModel Exception $throwable")

@@ -29,7 +29,7 @@ fun YearlyUsageScreen(
     viewModel: YearlyConsumptionViewModel = hiltViewModel()
 ) {
 
-    val viewModelState = viewModel.state
+    val viewModelState = viewModel.yearlyState
 
     Scaffold(
         topBar = {
