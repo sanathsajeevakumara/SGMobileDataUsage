@@ -22,8 +22,7 @@ class YearlyConsumptionViewModel @Inject constructor(
     var state by mutableStateOf<YearlyConsumptionState>(YearlyConsumptionState.OnEmptyScreen)
         private set
 
-    fun getYearlyTotalConsumptionData() = viewModelScope
-        .launch(dispatcher) {
+    fun getYearlyTotalConsumptionData() = viewModelScope.launch(dispatcher) {
 
             state = YearlyConsumptionState.OnLoading
 

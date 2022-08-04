@@ -42,10 +42,6 @@ class YearlyTotalConsumptionUseCase @Inject constructor(
                     repository.insertAllMobileDataUsageRecord(quarterConsumption)
                 }
 
-//                if (quarterConsumptionList != null) {
-//                    repository.insertAllMobileDataUsageRecord(quarterConsumptionList)
-//                }
-
             } else {
                 Log.e(
                     SGConstValue.ERROR_TAG,

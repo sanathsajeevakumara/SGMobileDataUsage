@@ -26,7 +26,7 @@ fun QuarterConsumptionScreen(
     viewModel: QuarterConsumptionViewModel = hiltViewModel()
 ) {
 
-    when(val state = viewModel.quarterState) {
+    when (val state = viewModel.quarterState) {
         is QuarterConsumptionState.OnScreenEmpty -> viewModel.getQuarterConsumptionsByYear(year = year)
         is QuarterConsumptionState.OnLoading -> {
             Box(
