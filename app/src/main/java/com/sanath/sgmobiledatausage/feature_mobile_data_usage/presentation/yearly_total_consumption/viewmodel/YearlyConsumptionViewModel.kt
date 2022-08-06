@@ -23,19 +23,19 @@ class YearlyConsumptionViewModel @Inject constructor(
 
     fun getYearlyTotalConsumptionData() = viewModelScope.launch(dispatcher) {
 
-            yearlyState = YearlyConsumptionState.OnLoading
+        yearlyState = YearlyConsumptionState.OnLoading
 
-            yearlyTotalConsumptionUseCase.getYearlyTotalConsumption()
-                .catch { error ->
-                    yearlyState = YearlyConsumptionState.OnError(error.toString())
-                }
-                .collect { yearlyTotalConsumption ->
-                    yearlyState =
-                        YearlyConsumptionState.OnYearlyConsumptionAvailable(yearlyTotalConsumption)
-                }
-        }
+        yearlyTotalConsumptionUseCase.getYearlyTotalConsumption()
+            .catch { error ->
+                yearlyState = YearlyConsumptionState.OnError(error.toString())
+            }
+            .collect { yearlyTotalConsumption ->
+                yearlyState =
+                    YearlyConsumptionState.OnYearlyConsumptionAvailable(yearlyTotalConsumption)
+            }
+    }
 
     fun fetchDataStoreSearchData() = viewModelScope.launch(dispatcher) {
-            yearlyTotalConsumptionUseCase.retrieveDataStoreConsumptionData()
+        yearlyTotalConsumptionUseCase.retrieveDataStoreConsumptionData()
     }
 }
