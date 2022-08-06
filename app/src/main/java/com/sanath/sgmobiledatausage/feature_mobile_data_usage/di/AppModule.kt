@@ -23,7 +23,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main
+        return Dispatchers.IO
     }
 
     @Provides
