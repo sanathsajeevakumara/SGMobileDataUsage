@@ -10,7 +10,6 @@ data class FilteredQuarterConsumption(
 
     fun getMappedQuarterConsumptionByYear(): Map<String, String>? {
         return try {
-//            printMapValue()
             val quartersList:List<String> = quarters.split(",")
             val volumesList:List<String> = volumes.split(",")
             quartersList.zip(volumesList).toMap()
@@ -19,16 +18,5 @@ data class FilteredQuarterConsumption(
             null
         }
     }
-
-//    private fun printMapValue() {
-//
-//        val quartersList:List<String> = quarters.split(",")
-//        val volumesList:List<String> = volumes.split(",")
-//        quartersList.zip(volumesList) { quarterList, volumeList->
-//            println(
-//                "MappedQuarterUsageByYear: year $year ${quartersList.zip(volumesList).toMap()}"
-//            )
-//        }
-//    }
 
 }
