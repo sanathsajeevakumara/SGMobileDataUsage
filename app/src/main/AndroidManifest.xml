@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.sanath.sgmobiledatausage.feature_mobile_data_usage.SGMobileDataUsageApplication"
+        android:name="com.sanath.sgmobiledatausage.featureMobileDataUsage.SGMobileDataUsageApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +17,7 @@
         android:theme="@style/Theme.SGMobileDataUsage"
         tools:targetApi="31">
         <activity
-            android:name="com.sanath.sgmobiledatausage.feature_mobile_data_usage.presentation.MainActivity"
+            android:name="com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.SGMobileDataUsage">
