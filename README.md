@@ -1,6 +1,6 @@
 # SGMobileDataUsage
 
-This app will retrieve and show mobile data usage by yearly and quarterly basis using Singapore's government database api https://data.gov.sg/dataset/mobile-data-usage.
+This app will retrieve and show mobile data usage by yearly and quarterly basis using __Singapore's government database API__ https://data.gov.sg/dataset/mobile-data-usage.
 
 ## Technologies
 
