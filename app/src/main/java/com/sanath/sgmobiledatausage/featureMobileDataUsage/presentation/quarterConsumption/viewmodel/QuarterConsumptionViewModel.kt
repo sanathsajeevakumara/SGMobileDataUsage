@@ -1,5 +1,6 @@
 package com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.quarterConsumption.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -29,6 +30,9 @@ class QuarterConsumptionViewModel @Inject constructor(
 
     fun getQuarterConsumptionsByYear(year: Int) = viewModelScope
         .launch(dispatcher + quarterExceptionHandler) {
+
+//            Log.d("ThreadChecker",
+//                "GetQuarterConsumptionsByYear running on ${Thread.currentThread().name}")
 
             //retrieve the initial year
             if (initialYear == -1) {

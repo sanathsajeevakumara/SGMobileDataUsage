@@ -1,5 +1,6 @@
 package com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.yearlyTotalConsumption
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -55,6 +56,10 @@ fun YearlyUsageScreen(
             when (viewModelState) {
 
                 is YearlyConsumptionState.OnEmptyScreen -> {
+
+//                    Log.d("ThreadChecker",
+//                        "YearlyUsageScreen running on ${Thread.currentThread().name}")
+
                     viewModel.getYearlyTotalConsumptionData()
                     viewModel.fetchDataStoreSearchData()
                 }

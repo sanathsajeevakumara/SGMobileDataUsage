@@ -1,5 +1,6 @@
 package com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.quarterConsumption
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
@@ -27,7 +28,13 @@ fun QuarterConsumptionScreen(
 ) {
 
     when (val state = viewModel.quarterState) {
-        is QuarterConsumptionState.OnScreenEmpty -> viewModel.getQuarterConsumptionsByYear(year = year)
+        is QuarterConsumptionState.OnScreenEmpty -> {
+
+//            Log.d("ThreadChecker",
+//                "QuarterConsumptionScreen running on ${Thread.currentThread().name}")
+
+            viewModel.getQuarterConsumptionsByYear(year = year)
+        }
         is QuarterConsumptionState.OnLoading -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
