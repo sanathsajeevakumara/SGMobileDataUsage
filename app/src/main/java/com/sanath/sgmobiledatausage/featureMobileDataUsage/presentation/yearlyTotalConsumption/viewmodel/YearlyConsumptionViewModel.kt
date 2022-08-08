@@ -10,6 +10,7 @@ import com.sanath.sgmobiledatausage.featureMobileDataUsage.domain.usecase.Yearly
 import com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.yearlyTotalConsumption.state.YearlyConsumptionState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +23,17 @@ class YearlyConsumptionViewModel @Inject constructor(
 
     var yearlyState by mutableStateOf<YearlyConsumptionState>(YearlyConsumptionState.OnEmptyScreen)
 
-    fun getYearlyTotalConsumptionData() = viewModelScope.launch(dispatcher) {
+    private val getYearlyTotalConsumptionDataHandler = CoroutineExceptionHandler { _, throwable ->
+        println("GetYearlyTotalConsumptionData Exception $throwable")
+    }
+
+    private val fetchDataStoreSearchDataHandler = CoroutineExceptionHandler { _, throwable ->
+        println("FetchDataStoreSearchDataHandler Exception $throwable")
+    }
+
+    fun getYearlyTotalConsumptionData() = viewModelScope.launch(
+        dispatcher + getYearlyTotalConsumptionDataHandler
+    ) {
 
 //        Log.d("ThreadChecker",
 //            "GetYearlyTotalConsumptionData running on ${Thread.currentThread().name}")
@@ -39,7 +50,9 @@ class YearlyConsumptionViewModel @Inject constructor(
             }
     }
 
-    fun fetchDataStoreSearchData() = viewModelScope.launch(dispatcher) {
+    fun fetchDataStoreSearchData() = viewModelScope.launch(
+        dispatcher + fetchDataStoreSearchDataHandler
+    ) {
 
 //        Log.d("ThreadChecker",
 //            "FetchDataStoreSearchData running on ${Thread.currentThread().name}")
