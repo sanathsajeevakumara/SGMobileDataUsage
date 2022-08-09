@@ -2,11 +2,11 @@ package com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.yearlyT
 
 import com.sanath.sgmobiledatausage.featureMobileDataUsage.domain.model.YearlyTotalConsumption
 
-sealed class YearlyConsumptionState {
-    object OnEmptyScreen: YearlyConsumptionState()
-    object OnLoading: YearlyConsumptionState()
-    data class OnYearlyConsumptionAvailable(val yearlyConsumption: List<YearlyTotalConsumption>):
-        YearlyConsumptionState()
+sealed interface YearlyConsumptionState {
+    object OnEmptyScreen : YearlyConsumptionState
+    object OnLoading : YearlyConsumptionState
+    data class OnYearlyConsumptionAvailable(val yearlyConsumption: List<YearlyTotalConsumption>) :
+        YearlyConsumptionState
 
-    data class OnError(val message: String): YearlyConsumptionState()
+    data class OnError(val message: String) : YearlyConsumptionState
 }

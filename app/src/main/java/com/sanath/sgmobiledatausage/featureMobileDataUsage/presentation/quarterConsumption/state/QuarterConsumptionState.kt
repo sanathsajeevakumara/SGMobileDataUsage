@@ -2,13 +2,13 @@ package com.sanath.sgmobiledatausage.featureMobileDataUsage.presentation.quarter
 
 import com.sanath.sgmobiledatausage.featureMobileDataUsage.domain.model.FilteredQuarterConsumption
 
-sealed class QuarterConsumptionState {
-    object OnScreenEmpty : QuarterConsumptionState()
-    object OnLoading : QuarterConsumptionState()
+sealed interface QuarterConsumptionState {
+    object OnScreenEmpty : QuarterConsumptionState
+    object OnLoading : QuarterConsumptionState
     data class OnQuarterUsageDataAvailable(
         val pageNumber: Int,
         val quarterUsage: List<FilteredQuarterConsumption>
-    ) : QuarterConsumptionState()
+    ) : QuarterConsumptionState
 
-    data class OnError(val message: String) : QuarterConsumptionState()
+    data class OnError(val message: String) : QuarterConsumptionState
 }
